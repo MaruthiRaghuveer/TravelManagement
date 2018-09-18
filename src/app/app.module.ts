@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DataTablesModule } from 'angular-datatables';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 import { AppComponent } from './app.component';
 
 
@@ -23,6 +25,7 @@ const AppRoutes = [
   imports: [
     BrowserModule,
     DataTablesModule,
+    BsDatepickerModule.forRoot(),
     RouterModule.forRoot(AppRoutes)
   ],
   providers: [],
