@@ -1,4 +1,5 @@
 <!-- Travel Details Start -->
+<form #TravelForm="ngForm">
 <div class="panel panel-default">
   <div class="panel-heading">
     Travel Details
@@ -15,9 +16,10 @@
           <div class="col-lg-3">
             <strong>Travel Date</strong>
           </div>
-          <div class="col-lg-3">
+          <div class="col-lg-2">
             <strong>Preference</strong>
           </div>
+          <div class="col-lg-1">&nbsp;</div>
         </div>
       </div>
       <div class="panel-body">
@@ -29,39 +31,43 @@
             <input type="text" name="destination1" placeholder="Enter Destination" class="form-control">
           </div>
           <div class="col-lg-3">
-            <input type="text" name="travelDate1" placeholder="Select Travel Date" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MMM-YYYY' }">
+            <input type="text" name="travelDate1" placeholder="Select" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MMM-YYYY' }">
           </div>
-          <div class="col-lg-3">
-            <select name="preference1" placeholder="Select Preference" class="form-control">
-              <option>Select Preference</option>
+          <div class="col-lg-2">
+            <select name="preference1" placeholder="Select" class="form-control">
+              <option>Select</option>
               <option>6-11AM</option>
               <option>12-6 PM</option>
               <option>6-10PMM</option>
             </select>
           </div>
         </div>
-        <div class="row rowmargin">
+        <div class="row rowmargin" *ngFor="let trvlDetails of trvlDet; let i = index" [attr.data-index]="i">
           <div class="col-lg-3">
-            <input type="text" name="origin2" placeholder="Enter Origin" class="form-control">
+            <input type="text" name="origin{{ trvlDetails }}" ngModel placeholder="Enter Origin" class="form-control">
           </div>
           <div class="col-lg-3">
-            <input type="text" name="destination2" placeholder="Enter Destination" class="form-control">
+            <input type="text" name="destination{{ trvlDetails }}" ngModel placeholder="Enter Destination" class="form-control">
           </div>
           <div class="col-lg-3">
-            <input type="text" name="travelDate2" placeholder="Select Travel Date" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MMM-YYYY' }">
+            <input type="text" name="travelDate{{ trvlDetails }}" ngModel placeholder="Select" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MMM-YYYY' }">
           </div>
-          <div class="col-lg-3">
-            <select name="preference2" placeholder="Select Preference" class="form-control">
-              <option>Select Preference</option>
+          <div class="col-lg-2">
+            <select name="preference{{ trvlDetails }}" placeholder="Select" class="form-control">
+              <option>Select</option>
               <option>6-11AM</option>
               <option>12-6 PM</option>
               <option>6-10PMM</option>
             </select>
+          </div>
+
+          <div class="col-lg-1">
+            <button class="btn btn-primary" (click)="deleteTrvlDet(i)">Delete</button>
           </div>
         </div>
       </div>
     </div>
-    <button class="btn btn-primary">Add Travel</button>
+    <button class="btn btn-primary" (click)="addTrvlDet()">Add Travel</button>
   </div>
 </div>
 <!-- Travel Details End -->
@@ -109,7 +115,7 @@
             <h5>abc@gmail.com</h5>
           </div>
         </div>
-        <div class="row rowmargin">
+        <div class="row rowmargin" *ngFor="let TrvllrDet of travellers">
           <div class="col-lg-3">
             <h5>ABC</h5>
           </div>
@@ -244,6 +250,7 @@
 </div>
 <div class="clear"></div>
 <div class="col-lg-12">
-  <input type="submit" name="submit" value="Submit" class="btn btn-primary"> &nbsp; &nbsp;
+  <input type="submit" name="submit" value="Submit" class="btn btn-primary" [disabled]="TravelForm.isValid"> &nbsp; &nbsp;
   <input type="button" name="cance" value="Cancel" class="btn btn-primary"> 
 </div>
+</form>
